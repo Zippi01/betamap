@@ -5,6 +5,6 @@ class PlaceMailer < ApplicationMailer
     @places_json = places_json
     @email = email
     # @user = params[:user]
-    mail(to: @email, subject: 'Result')
+    mail(to: @email, subject: 'Результат')
   end
 end
