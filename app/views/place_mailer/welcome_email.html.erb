@@ -2,24 +2,30 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   </head>
   <body>
-    <table class="table table-bordered table-dark">
-      <tr>
-        <td scope="col">Назва</td>
-        <td scope="col">Адреса</td>
-        <td scope="col">Рейтинг</td>
-        <td scope="col">Кількість коментарів</td>
-        <td scope="col">Оцінка алгоритму</td>
-      </tr>
-    <% @places_json.each do |place| %>
-      <tr scope="row">
-        <td><%= place['name'] %></td>
-        <td><%= place['address'] %></td>
-        <td><%= place['rate'] %></td>
-        <td><%= place['comment_count'] %></td>
-        <td><%= eval(sprintf("%8.2f",place['rating'])) %></td>
-      </tr>
-    <% end %>
+    <table class="table table-bordered table-dark table-striped">
+      <thead>
+        <tr>
+          <td scope="col"><b>№</b></td>
+          <td scope="col"><b>Назва</b></td>
+          <td scope="col"><b>Адреса</b></td>
+          <td scope="col"><b>Рейтинг</b></td>
+          <td scope="col"><b>Кількість коментарів</b></td>
+          <td scope="col"><b>Оцінка алгоритму</b></td>
+        </tr>
+      </thead>
+      <% @places_json.each_with_index do |place, i| %>
+        <tr scope="row">
+          <td><%= i+1 %>.</td>
+          <td><%= place['name'] %></td>
+          <td><%= place['address'] %></td>
+          <td><%= place['rate'] %></td>
+          <td><%= place['comment_count'] %></td>
+          <td><%= eval(sprintf("%8.2f",place['rating'])) %></td>
+        </tr>
+      <% end %>
+    </table>
   </body>
 </html>
