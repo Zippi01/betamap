@@ -1,0 +1,17 @@
+<div class="page">
+  <div class="box">
+    <h1>Вхід</h1>
+    <a id="notice", class="error_message"><%= notice %></a>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: "Пароль" %>
+      <% if devise_mapping.rememberable? %>
+          <%= f.check_box :remember_me %>
+          <%= f.label "Залишитись в системі", class: "check" %>
+      <% end %>
+        <%= f.submit "Вхід" %>
+        <%= render "devise/shared/links" %>
+    <% end %>
+  </div>
+</div>

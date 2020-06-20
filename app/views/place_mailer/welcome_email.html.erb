@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <table class="table">
+      <tr>
+        <td>Назва</td>
+        <td>Адреса</td>
+        <td>Рейтинг</td>
+        <td>Кількість коментарів</td>
+        <td>Оцінка алгоритму</td>
+      </tr>
+    <% @places_json.each do |place| %>
+      <tr>
+        <td><%= place['name'] %></td>
+        <td><%= place['address'] %></td>
+        <td><%= place['rate'] %></td>
+        <td><%= place['comment_count'] %></td>
+        <td><%= eval(sprintf("%8.2f",place['rating'])) %></td>
+      </tr>
+    <% end %>
+  </body>
+</html>

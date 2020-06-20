@@ -1,0 +1,103 @@
+.page {
+  width: 100%;
+  height:100vh;
+  font-family: sans-serif;
+  background: rgba(78,52,201,1.0);
+}
+
+.box {
+  width: 380px;
+  padding: 25px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 0 8px 8px rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.box h1{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box input[type = "email"],.box input[type = "password"] {
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #a29bfe;
+  padding: 14px 10px;
+  width: 200px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+}
+
+.box input[type="email"]::-webkit-input-placeholder {
+    color: white;
+   }
+
+.box input[type="password"]::-webkit-input-placeholder {
+    color: white;
+  }
+
+.check {
+  color: white;
+}
+
+.button {
+  color: white;
+}
+
+.facebook {
+  color: white;
+  font-size: 27px;
+}
+
+.facebook:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.button:hover {
+  color: #a29bfe;
+  text-decoration: none;
+}
+
+.box input[type = "email"]:focus,.box input[type = "password"]:focus{
+  width: 280px;
+  border-color: #a29bfe;
+}
+.box input[type = "submit"]{
+  border:0;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  border: 2px solid #00b894;
+  padding: 14px 40px;
+  outline: none;
+  color: white;
+  border-radius: 24px;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.box input[type = "submit"]:hover{
+  background: #00b894;
+}
+
+.error_message {
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+}
+.error_message:hover {
+  outline:none;
+  border:none;
+}

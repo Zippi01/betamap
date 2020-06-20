@@ -1,0 +1,14 @@
+<div class="page">
+  <br><br><br><br>
+  <div class="box">
+    <h1>Реєстрація</h1>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name),html: {class: 'signup-form'}) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "Пароль" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Підтвердіть пароль" %>
+      <%= f.submit "Реєстрація" %>
+      <%= render "devise/shared/links" %>
+    <% end %>
+  </div>
+</div>

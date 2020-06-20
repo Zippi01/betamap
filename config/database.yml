@@ -1,0 +1,9 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ror_final_development
+  pool: 5
+  username: katya
+  password: 123
+  timeout: 5000
+  host: localhost

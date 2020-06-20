@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BetaMap</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag '/hnet.com-image.ico' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src = "https://kit.fontawesome.com/ac7c51298a.js" crossorigin = "anonymous"></script>
+    <%= render 'shared/header' %>
+  </head>
+  <body>
+    <%= yield(:head_tags) %>
+    <%= yield %>
+  </body>
+  <footer>
+    <%= render 'shared/footer' %>
+  </footer>
+</html>

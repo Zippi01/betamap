@@ -1,0 +1,144 @@
+<div class="page-con-container">
+  <div class="page-in-container">
+    <div class="slider_position">
+      <input type="range" id="radius" name="rangeInput" min="100" max="1000" onchange="updateTextInput(this.value);" class="slider">
+      <input  id="textInput"  class="input_st" value="50" disabled>%
+    </div>
+    <div class="select_position">
+        <select id="category" class="browser-default custom-select select_size" >
+          <option value="store">Магазин</option>
+          <option value="clothing_store" >Магазин одягу</option>
+          <option value="electronics_store">Магазин електроніки</option>
+          <option value="supermarket">Супермаркет</option>
+          <option value="pet_store">Зоомагазин</option>
+          <option value="beauty_salon">Салон краси</option>
+          <option value="drugstore">Аптека</option>
+          <option value="cafe">Кафе</option>
+          <option value="restaurant">Ресторан</option>
+        </select>
+      </div>
+
+      <div class="button_position">
+
+      <button id="more" onclick="initMap()" class="results-btn results-btn-tx1 "><i class="fas fa-redo ico-button"></i>Оновити карту</button>
+      <%= form_with(model: place, local: true) do |form| %>
+      <% if place.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+        <ul>
+          <% place.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <div class="field">
+        <%= form.hidden_field :name, id: :place_name %>
+      </div>
+
+      <div class="actions">
+          <%= button_tag type: 'submit', class: "create-btn-button results-btn-tx1", id: "register-button" do %>
+          <i class="far fa-envelope-open ico-button"></i>
+          Надіслати результат
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="position_map">
+  <div id="map"></div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZTzMEdD2iN5NkYojIHUeJtNi6_NIWla4&libraries=places&callback=initMap" async defer></script> <!--callback=initMap-->
+<script type="text/javascript">
+    var map;
+    var nameAddress = "";
+    var address = "";
+    var previousMarker;
+    var lat = 0;
+    var lng = 0;
+    function initMap() {
+      var radius = document.getElementById("radius").value
+      var category = document.getElementById("category").value
+      // Create the map.
+      if(lat != 0) {
+      var pyrmont = {lat: lat, lng: lng};
+    } else {
+      var pyrmont = {lat: 49.451703, lng: 32.045537};
+    }
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: pyrmont,
+        zoom: 17
+      });
+
+      map.addListener('click', function(e) {
+       // if the previousMarker exists, remove it
+       if (previousMarker)
+         previousMarker.setMap(null);
+
+       latLng = e.latLng;
+
+       lat = e.latLng.lat()
+       lng = e.latLng.lng()
+       console.log(lat);
+       console.log(lng);
+       initMap();
+       previousMarker = new google.maps.Marker({
+         position: latLng,
+         map: map
+       });
+     }
+
+   );
+      // Create the places service.
+      var service = new google.maps.places.PlacesService(map);
+      var getNextPage = null;
+
+      // Perform a nearby search.
+      service.nearbySearch(
+      {location: pyrmont, radius: radius, type: [category]},
+      function(results, status, pagination) {
+        if (status !== 'OK') return;
+
+        createMarkers(results);
+        moreButton.disabled = !pagination.hasNextPage;
+        getNextPage = pagination.hasNextPage && function() {
+          pagination.nextPage();
+        };
+      });
+    }
+    var loc;
+    function createMarkers(places) {
+      var bounds = new google.maps.LatLngBounds();
+      var placesList = document.getElementById('places');
+
+      for (var i = 0, place; place = places[i]; i++) {
+        var image = {
+          url: place.icon,
+          size: new google.maps.Size(71, 71),
+          origin: new google.maps.Point(0, 0),
+          anchor: new google.maps.Point(17, 34),
+          scaledSize: new google.maps.Size(25, 25)
+        };
+
+        var marker = new google.maps.Marker({
+          map: map,
+          icon: image,
+          title: place.name,
+          position: place.geometry.location
+        });
+
+        nameAddress += place.place_id + "; "
+
+        bounds.extend(place.geometry.location);
+      }
+      console.log(nameAddress)
+      map.fitBounds(bounds);
+      document.getElementById("place_name").value = nameAddress.toString();
+      nameAddress = "";
+    }
+
+    function updateTextInput(val) {
+      document.getElementById('textInput').value = Math.round(val*100/1000);
+    }
+  </script>

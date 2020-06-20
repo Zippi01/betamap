@@ -1,0 +1,2 @@
+class ParserSite < ApplicationRecord
+end
